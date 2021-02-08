@@ -37,16 +37,31 @@ path_wp_vx, path_wp_vy, path_wp_vz= np.array([]), np.array([]), np.array([])
 current_speed, v= 0.0 , 0.0
 
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) +
-                "/../QuinticPolynomialsPlanner/")
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) +
-                "/../CubicSpline/")
+#sys.path.append(os.path.dirname(os.path.abspath(__file__)) +
+#                "/../QuinticPolynomialsPlanner/")
+#sys.path.append(os.path.dirname(os.path.abspath(__file__)) +
+#                "/../CubicSpline/")
+
+# clone github repository URL = 'https://github.com/akhilkanduri/Github_WP3_Autoware.git' : Add this to Docker File
+
+URL = 'https://github.com/akhilkanduri/Github_WP3_Autoware.git'
+# import git # to clone if not added in dockerfile
+# git.Git.clone(URL)
+
+# method 1
+
+CurrentDirectory= os.getcwd()
+print(os.getcwd())
+Directory_List = [x[0] for x in os.walk(os.getcwd())]
+print(Directory_List)  # Just for reference to check directory
 
 try:
     from quintic_polynomials_planner import QuinticPolynomial
     import cubic_spline_planner
 except ImportError:
-    raise
+   raise
+   print('Error: Check Path')
+    
 
 SIM_LOOP = 500
 
